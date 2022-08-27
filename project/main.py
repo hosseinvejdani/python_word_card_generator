@@ -4,10 +4,8 @@ from itertools import product
 # this is python word card generator
 
 def generate_all_combinations(words:list):
-   # generate all possible combination with words
    result = product(words, repeat=len(words)) # You can change the repeat more then n length
-   result = [(set(l)) for l in list(result)]
-   # result = [l for l in result if len(l)==len(words)]
+   result = [list(l) for l in result if len(set(l))==len(words)]
    return result
 
 def generate_word_id(words:list):
@@ -46,7 +44,7 @@ words_repo = ["house",
 "food",
 "sun"]
 
-SIZE = 2
+SIZE = 3
 
 # select SIZE number words randomly
 words = random.choices(population=words_repo,k=SIZE)
@@ -59,12 +57,13 @@ words_groups = generate_all_combinations(words)
 
 print(words_groups)
 
-# cards = {}
+cards = {}
 
-# for words in words_groups:
-#    cards[generate_word_id(words)] = {"words":words}
+for words in words_groups:
+   cards[generate_word_id(words)] = {"words":words}
 
-# print(cards)
+print(cards)
+
 
 
 
